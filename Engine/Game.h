@@ -23,6 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Brick.h"
 
 class Game
 {
@@ -40,6 +41,12 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+	static constexpr int nBrickRows=6;
+	static constexpr int nBrickColomns=18;
+	static constexpr int nBricks = nBrickRows * nBrickColomns;
+	static constexpr float BrickWidth = 40.0f;
+	static constexpr float BrickHeight = 15.0f;
+	Brick Bricks[nBricks];
 	/********************************/
 	/*  User Variables              */
 	/********************************/

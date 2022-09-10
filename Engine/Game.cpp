@@ -26,6 +26,17 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd )
 {
+	Vec2 startPos = Vec2(40.0f, 40.0f);
+	Color colors[nBrickRows] = { Colors::Red,Colors::Blue,Colors::Green,Colors::Yellow,Colors::Magenta,Colors::White };
+	int c = 0;
+	for (int j = 0; j < nBrickRows; j++)
+	{
+		for (int i = 0; i < nBrickColomns; i++)
+		{
+			Bricks[i + j * nBrickColomns] = Brick(Rect(startPos + Vec2(i * BrickWidth, j * BrickHeight),BrickWidth,BrickHeight), colors[j]);
+			c++;
+		}
+	}
 }
 
 void Game::Go()
@@ -42,4 +53,8 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	for (Brick& brick:Bricks)
+	{
+		brick.Draw(gfx);
+	}
 }

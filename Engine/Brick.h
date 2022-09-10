@@ -11,6 +11,7 @@ public:
 	void Draw(Graphics& gfx);
 
 private:
+	float padding = -1.0f;
 	Rect rect;
 	Color color;
 	bool bDestroyed = false;
