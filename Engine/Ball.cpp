@@ -21,7 +21,7 @@ void Ball::Update(float dt)
 bool Ball::doCollideWithWall(const Rect& wall)
 {
 	bool bCollided = false;
-	Rect rect = Rect::FromCenter(pos, radius, radius);
+	Rect rect = GetRect();
 	if (rect.left <= wall.left)
 	{
 		pos.x += wall.left - rect.left;
@@ -58,4 +58,9 @@ void Ball::ReboundX()
 void Ball::ReboundY()
 {
 	vel.y = -vel.y;
+}
+
+Rect Ball::GetRect()
+{
+	return  Rect::FromCenter(pos, radius, radius);
 }

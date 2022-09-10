@@ -26,7 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	Walls(Vec2(0.0f,0.0f),Vec2(gfx.ScreenWidth-1,gfx.ScreenHeight-1)),
-	ball(Vec2(400.0f,300.0f),Vec2(100.0f,100.0f))
+	ball(Vec2(400.0f,300.0f),Vec2(1000.0f,1000.0f))
 {
 	Vec2 startPos = Vec2(40.0f, 40.0f);
 	Color colors[nBrickRows] = { Colors::Red,Colors::Blue,Colors::Green,Colors::Yellow,Colors::Magenta,Colors::White };
@@ -53,9 +53,25 @@ void Game::UpdateModel()
 {
 	const float dt = ft.Mark();
 	ball.Update(dt);
+	for (Brick& brick : Bricks)
+	{
+		if (brick.doCollideWithBall(ball))
+		{
+			ball.ReboundY();
+			break;
+		}
+	}
+	if (ball.doCollideWithWall(Walls))
+	{
+
+	}
 }
 
 void Game::ComposeFrame()
 {
+	for (Brick& brick : Bricks)
+	{
+		brick.Draw(gfx);
+	}
 	ball.Draw(gfx);
 }

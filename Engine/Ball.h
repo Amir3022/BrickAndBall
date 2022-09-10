@@ -1,7 +1,7 @@
 #pragma once
 #include "Rect.h"
-#include "Brick.h"
 #include "Graphics.h"
+
 class Ball
 {
 public:
@@ -12,6 +12,7 @@ public:
 	bool doCollideWithWall(const Rect& wall);
 	void ReboundX();
 	void ReboundY();
+	Rect GetRect();
 	
 private:
 	static constexpr float radius = 7.0f;
