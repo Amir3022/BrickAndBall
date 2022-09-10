@@ -27,6 +27,7 @@
 #include "FrameTimer.h"
 #include "Ball.h"
 #include "Paddle.h"
+#include "Sound.h"
 
 class Game
 {
@@ -54,6 +55,8 @@ private:
 	Rect Walls;
 	Ball ball;
 	Paddle paddle;
+	Sound soundPad;
+	Sound soundBrick;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
