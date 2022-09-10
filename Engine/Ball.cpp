@@ -24,26 +24,26 @@ bool Ball::doCollideWithWall(const Rect& wall)
 	Rect rect = GetRect();
 	if (rect.left <= wall.left)
 	{
-		pos.x += wall.left - rect.left;
+		pos.x = wall.left + radius;
 		ReboundX();
 		bCollided = true;
 	}
 	else if (rect.right >= wall.right)
 	{
-		pos.x += wall.right - rect.right;
+		pos.x = wall.right - radius;
 		ReboundX();
 		bCollided = true;
 	}
 
 	if (rect.top <= wall.top)
 	{
-		pos.y += wall.top - rect.top;
+		pos.y = wall.top + radius;
 		ReboundY();
 		bCollided = true;
 	}
 	else if(rect.bottom >= wall.bottom)
 	{
-		pos.y += wall.bottom - rect.bottom;
+		pos.y = wall.bottom - radius;
 		ReboundY();
 		bCollided = true;
 	}
@@ -63,4 +63,9 @@ void Ball::ReboundY()
 Rect Ball::GetRect()
 {
 	return  Rect::FromCenter(pos, radius, radius);
+}
+
+Vec2 Ball::getVel()
+{
+	return vel;
 }
