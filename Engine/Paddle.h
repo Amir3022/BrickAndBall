@@ -14,7 +14,7 @@ public:
 	void Draw(Graphics& gfx);
 	Rect GetRect(float cut);
 	void doCollideWithWalls(const Rect& walls);
-	bool doCollideWithBall(Ball& ball);
+	bool doCollideWithBall(Ball& ball,float dt);
 private:
 	Color BodyColor = Colors::Gray;
 	Color WingColor = Colors::Red;

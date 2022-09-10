@@ -46,12 +46,31 @@ void Paddle::doCollideWithWalls(const Rect& walls)
 	}
 }
 
-bool Paddle::doCollideWithBall(Ball& ball)
+bool Paddle::doCollideWithBall(Ball& ball,float dt)
 {
-	if (ball.getVel().y > 0)
+	Vec2 ballVel = ball.getVel();
+	if (ballVel.y > 0)
 	{
 		Rect ballRect = ball.GetRect();
-		return ballRect.left <= GetRect(0.0f).right && ballRect.top <= GetRect(0.0f).bottom && ballRect.right > GetRect(0.0f).left && ballRect.bottom >= GetRect(0.0f).top;
+		if (ballRect.left <= GetRect(0.0f).right && ballRect.top <= GetRect(0.0f).bottom && ballRect.right > GetRect(0.0f).left && ballRect.bottom >= GetRect(0.0f).top)
+		{
+			if (GetRect(0.0f).right - ballRect.left <= -ballVel.x*dt)
+			{
+				ball.addPos(Vec2(ball.getVel().x * dt, 0.0f));
+				ball.ReboundX();
+			}
+			else if (ballRect.right - GetRect(0.0f).left <= ballVel.x * dt)
+			{
+				ball.addPos(Vec2(-ballVel.x * dt, 0.0f));
+				ball.ReboundX();
+			}
+			if (ballRect.bottom - GetRect(0.0f).top <= ballVel.y*dt)
+			{
+				ball.addPos(Vec2(0.0f, -ballVel.y * dt));
+				ball.ReboundY();
+			}
+			return true;
+		}
 	}
 	return false;
 }

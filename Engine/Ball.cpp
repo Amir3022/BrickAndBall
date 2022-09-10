@@ -69,3 +69,18 @@ Vec2 Ball::getVel()
 {
 	return vel;
 }
+
+Vec2 Ball::getPos()
+{
+	return pos;
+}
+
+void Ball::addPos(const Vec2& delta_pos)
+{
+	pos += delta_pos;
+}
+
+void Ball::setPos(const Vec2& in_pos)
+{
+	pos = in_pos;
+}
