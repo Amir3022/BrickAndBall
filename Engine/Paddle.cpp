@@ -13,10 +13,16 @@ void Paddle::Update(Keyboard& kbd, float dt)
 	if (kbd.KeyIsPressed(VK_LEFT))
 	{
 		pos.x -= speed * dt;
+		vel = Vec2(-speed, 0.0f);
 	}
 	else if (kbd.KeyIsPressed(VK_RIGHT))
 	{
 		pos.x += speed * dt;
+		vel = Vec2(speed, 0.0f);
+	}
+	else
+	{
+		vel = Vec2(0.0f, 0.0f);
 	}
 }
 
@@ -54,14 +60,14 @@ bool Paddle::doCollideWithBall(Ball& ball,float dt)
 		Rect ballRect = ball.GetRect();
 		if (ballRect.left <= GetRect(0.0f).right && ballRect.top <= GetRect(0.0f).bottom && ballRect.right > GetRect(0.0f).left && ballRect.bottom >= GetRect(0.0f).top)
 		{
-			if (GetRect(0.0f).right - ballRect.left <= -ballVel.x*dt)
+			if (GetRect(0.0f).right - ballRect.left <= ( - ballVel.x +vel.x )* dt)
 			{
-				ball.addPos(Vec2(ball.getVel().x * dt, 0.0f));
+				ball.addPos(Vec2(-(-ball.getVel().x+vel.x) * dt, 0.0f));
 				ball.ReboundX();
 			}
-			else if (ballRect.right - GetRect(0.0f).left <= ballVel.x * dt)
+			else if (ballRect.right - GetRect(0.0f).left <=( ballVel.x - vel.x )* dt)
 			{
-				ball.addPos(Vec2(-ballVel.x * dt, 0.0f));
+				ball.addPos(Vec2(-(ballVel.x-vel.x) * dt, 0.0f));
 				ball.ReboundX();
 			}
 			if (ballRect.bottom - GetRect(0.0f).top <= ballVel.y*dt)

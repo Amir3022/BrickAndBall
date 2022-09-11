@@ -22,4 +22,5 @@ private:
 	float halfWidth;
 	float halfHeight;
 	Vec2 pos;
+	Vec2 vel;
 };
