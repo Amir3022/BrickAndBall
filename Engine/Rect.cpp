@@ -22,6 +22,11 @@ Rect::Rect(const Vec2& topleft, float width, float height)
 {
 }
 
+bool Rect::IsOverlappigWith(const Rect& rect)
+{
+	return left <= rect.right && top <= rect.bottom && right > rect.left && bottom >= rect.top;
+}
+
 Rect Rect::FromCenter(const Vec2& center, float halfWidth, float halfHeight)
 {
 	return Rect(center-Vec2(halfWidth, halfHeight), center + Vec2(halfWidth, halfHeight));

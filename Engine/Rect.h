@@ -9,6 +9,7 @@ public:
 	Rect(const Vec2& topleft, const Vec2& bottomright);
 	Rect(const Vec2& topleft, float width, float height);
 	static Rect FromCenter(const Vec2& center, float halfWidth, float halfHeight);
+	bool IsOverlappigWith(const Rect& rect);
 	Rect Expand(float padding);
 public:
 	float left;
