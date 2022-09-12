@@ -11,6 +11,7 @@ public:
 	static Rect FromCenter(const Vec2& center, float halfWidth, float halfHeight);
 	bool IsOverlappigWith(const Rect& rect);
 	Rect Expand(float padding);
+	const Vec2& GetCenter();
 public:
 	float left;
 	float right;
