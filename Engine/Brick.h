@@ -12,7 +12,7 @@ public:
 	void Draw(Graphics& gfx);
 	bool CheckCollideWithBall(const Ball& ball) const;
 	void ExecuteCollideWithBall(Ball& ball,float dt);
-	const Vec2& GetCenter();
+	Vec2 GetCenter();
 
 private:
 	float padding = -1.0f;

@@ -32,7 +32,7 @@ void Brick::ExecuteCollideWithBall(Ball& ball, float dt)
 	}
 }
 
-const Vec2& Brick::GetCenter()
+Vec2 Brick::GetCenter()
 {
 	return rect.GetCenter();
 }
