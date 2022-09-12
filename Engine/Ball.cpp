@@ -60,7 +60,7 @@ void Ball::ReboundY()
 	vel.y = -vel.y;
 }
 
-Rect Ball::GetRect()
+Rect Ball::GetRect() const
 {
 	return  Rect::FromCenter(pos, radius, radius);
 }

@@ -12,7 +12,7 @@ public:
 	bool doCollideWithWall(const Rect& wall);
 	void ReboundX();
 	void ReboundY();
-	Rect GetRect();
+	Rect GetRect() const;
 	Vec2 getVel();
 	Vec2 getPos();
 	void addPos(const Vec2& delta_pos);
