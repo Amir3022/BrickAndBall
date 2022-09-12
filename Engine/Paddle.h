@@ -15,6 +15,7 @@ public:
 	Rect GetRect(float cut);
 	void doCollideWithWalls(const Rect& walls);
 	bool doCollideWithBall(Ball& ball,float dt);
+	void ResetCooldown();
 private:
 	Color BodyColor = Colors::Gray;
 	Color WingColor = Colors::Red;
@@ -23,4 +24,5 @@ private:
 	float halfHeight;
 	Vec2 pos;
 	Vec2 vel;
+	bool bCooldown = false;;
 };

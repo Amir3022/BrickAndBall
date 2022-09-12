@@ -58,7 +58,7 @@ bool Paddle::doCollideWithBall(Ball& ball,float dt)
 	if (ballVel.y > 0)
 	{
 		Rect ballRect = ball.GetRect();
-		if (ballRect.left <= GetRect(0.0f).right && ballRect.top <= GetRect(0.0f).bottom && ballRect.right > GetRect(0.0f).left && ballRect.bottom >= GetRect(0.0f).top)
+		if (ballRect.IsOverlappigWith(GetRect(0.0f)))
 		{
 			if (GetRect(0.0f).right - ballRect.left <= ( - ballVel.x +vel.x )* dt)
 			{
@@ -79,4 +79,9 @@ bool Paddle::doCollideWithBall(Ball& ball,float dt)
 		}
 	}
 	return false;
+}
+
+void Paddle::ResetCooldown()
+{
+	bCooldown = false;
 }
