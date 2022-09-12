@@ -37,7 +37,7 @@ Rect Rect::Expand(float padding)
 	return Rect(left - padding, right + padding, top - padding, bottom + padding);
 }
 
-const Vec2& Rect::GetCenter()
+Vec2 Rect::GetCenter()
 {
 	return Vec2((left + right) / 2.0f, (top + bottom) / 2.0f);
 }
