@@ -71,6 +71,11 @@ Vec2 Ball::getVel()
 	return vel;
 }
 
+void Ball::setVel(const Vec2& in_vel)
+{
+	vel = in_vel;
+}
+
 Vec2 Ball::getPos()
 {
 	return pos;

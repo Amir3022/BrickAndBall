@@ -14,6 +14,7 @@ public:
 	void ReboundY();
 	Rect GetRect() const;
 	Vec2 getVel();
+	void setVel(const Vec2& in_vel);
 	Vec2 getPos();
 	void addPos(const Vec2& delta_pos);
 	void setPos(const Vec2& in_pos);
