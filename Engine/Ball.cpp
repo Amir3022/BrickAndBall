@@ -45,6 +45,7 @@ bool Ball::doCollideWithWall(const Rect& wall)
 	{
 		pos.y = wall.bottom - radius;
 		ReboundY();
+		bLost = true;
 		bCollided = true;
 	}
 	return bCollided;
@@ -83,4 +84,9 @@ void Ball::addPos(const Vec2& delta_pos)
 void Ball::setPos(const Vec2& in_pos)
 {
 	pos = in_pos;
+}
+
+bool Ball::CheckLossCondition()
+{
+	return bLost;
 }
