@@ -21,8 +21,12 @@ bool Brick::doCollideWithBall(Ball& ball, float dt)
 	{
 		//Vec2 ballVel = ball.getVel();
 		Rect ballRect = ball.GetRect();
-		ball.ReboundY();
-		bDestroyed = ballRect.left <= rect.right && ballRect.top <= rect.bottom && ballRect.right > rect.left && ballRect.bottom >= rect.top;
+		
+		bDestroyed = ballRect.IsOverlappigWith(rect);
+		if (bDestroyed)
+		{
+			ball.ReboundY();
+		}
 		return bDestroyed;
 
 	}
