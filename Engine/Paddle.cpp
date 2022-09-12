@@ -54,27 +54,28 @@ void Paddle::doCollideWithWalls(const Rect& walls)
 
 bool Paddle::doCollideWithBall(Ball& ball,float dt)
 {
-	Vec2 ballVel = ball.getVel();
-	if (ballVel.y > 0)
+	if (!bCooldown)
 	{
+		Vec2 ballVel = ball.getVel();
 		Rect ballRect = ball.GetRect();
 		if (ballRect.IsOverlappigWith(GetRect(0.0f)))
 		{
-			if (GetRect(0.0f).right - ballRect.left <= ( - ballVel.x +vel.x )* dt)
+			if (GetRect(0.0f).right - ballRect.left <= (-ballVel.x + vel.x) * dt)
 			{
-				ball.addPos(Vec2(-(-ball.getVel().x+vel.x) * dt, 0.0f));
+				ball.addPos(Vec2(-(-ball.getVel().x + vel.x) * dt, 0.0f));
 				ball.ReboundX();
 			}
-			else if (ballRect.right - GetRect(0.0f).left <=( ballVel.x - vel.x )* dt)
+			else if (ballRect.right - GetRect(0.0f).left <= (ballVel.x - vel.x) * dt)
 			{
-				ball.addPos(Vec2(-(ballVel.x-vel.x) * dt, 0.0f));
+				ball.addPos(Vec2(-(ballVel.x - vel.x) * dt, 0.0f));
 				ball.ReboundX();
 			}
-			if (ballRect.bottom - GetRect(0.0f).top <= ballVel.y*dt)
+			if (ballRect.bottom - GetRect(0.0f).top <= ballVel.y * dt)
 			{
 				ball.addPos(Vec2(0.0f, -ballVel.y * dt));
 				ball.ReboundY();
 			}
+			bCooldown = true;
 			return true;
 		}
 	}
