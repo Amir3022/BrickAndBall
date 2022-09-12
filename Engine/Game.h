@@ -45,8 +45,11 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
-	static constexpr int nBrickRows=6;
-	static constexpr int nBrickColomns=18;
+	
+	/********************************/
+	/*  User Variables              */
+	static constexpr int nBrickRows = 6;
+	static constexpr int nBrickColomns = 18;
 	static constexpr int nBricks = nBrickRows * nBrickColomns;
 	static constexpr float BrickWidth = 40.0f;
 	static constexpr float BrickHeight = 15.0f;
@@ -57,7 +60,9 @@ private:
 	Paddle paddle;
 	Sound soundPad;
 	Sound soundBrick;
-	/********************************/
-	/*  User Variables              */
+	Sound soundLose;
+	bool bGameStarted = false;
+	bool losePlayed = false;
+	bool bLost = false;
 	/********************************/
 };
