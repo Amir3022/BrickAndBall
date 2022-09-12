@@ -75,6 +75,11 @@ bool Paddle::doCollideWithBall(Ball& ball,float dt)
 				ball.addPos(Vec2(0.0f, -ballVel.y * dt));
 				ball.ReboundY();
 			}
+			else if (ballRect.top - GetRect(0.0f).bottom >= ballVel.y * dt)
+			{
+				ball.addPos(Vec2(0.0f, ballVel.y * dt));
+				ball.ReboundY();
+			}
 			bCooldown = true;
 			return true;
 		}
