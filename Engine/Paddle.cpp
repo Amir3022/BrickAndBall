@@ -62,7 +62,7 @@ bool Paddle::doCollideWithBall(Ball& ball,float dt)
 		{
 			if (GetRect(0.0f).right - ballRect.left <= (-ballVel.x + vel.x) * dt)
 			{
-				ball.addPos(Vec2(-(-ball.getVel().x + vel.x) * dt, 0.0f));
+				ball.addPos(Vec2(-(-ballVel.x + vel.x) * dt, 0.0f));
 				ball.ReboundX();
 			}
 			else if (ballRect.right - GetRect(0.0f).left <= (ballVel.x - vel.x) * dt)
