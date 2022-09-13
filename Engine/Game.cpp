@@ -26,12 +26,13 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	Walls(Vec2(0.0f,0.0f),Vec2(gfx.ScreenWidth-1,gfx.ScreenHeight-1)),
+	walls(Vec2(20.0f,20.0f),Vec2(gfx.ScreenWidth-21,gfx.ScreenHeight-21)),
 	ball(Vec2(700.0f,200.0f),Vec2(0.0f,0.0f)),
-	paddle(Vec2(400.0f,500.0f),50.0f,15.0f),
+	paddle(Vec2(400.0f,500.0f),50.0f,10.0f),
 	soundBrick(L"Sounds\\arkbrick.wav"),
 	soundPad(L"Sounds\\arkpad.wav"),
-	soundLose(L"Sounds\\lose4.wav")
+	soundLose(L"Sounds\\lose4.wav"),
+	testWall(Rect(Vec2(20.0,20.0f),Vec2(779.0f,579.0f)),20,Colors::Red)
 {
 	Vec2 startPos = Vec2(80.0f, 40.0f);
 	Color colors[nBrickRows] = { Colors::Red,Colors::Blue,Colors::Green,Colors::Yellow,Colors::Magenta,Colors::White };
@@ -63,7 +64,7 @@ void Game::UpdateModel()
 			const float dt = ft.Mark();
 			ball.Update(dt);
 			paddle.Update(wnd.kbd, dt);
-			paddle.doCollideWithWalls(Walls);
+			paddle.doCollideWithWalls(walls);
 			float curDistanceSq;
 			int index;
 			bool collisionHappened = false;
@@ -98,7 +99,7 @@ void Game::UpdateModel()
 			{
 				soundPad.Play();
 			}
-			if (ball.doCollideWithWall(Walls))
+			if (ball.doCollideWithWall(walls))
 			{
 				paddle.ResetCooldown();
 				bLost = ball.CheckLossCondition();
@@ -134,6 +135,7 @@ void Game::ComposeFrame()
 		}
 		paddle.Draw(gfx);
 		ball.Draw(gfx);
+		testWall.Draw(gfx);
 		if (bLost)
 		{
 			SpriteCodex::DrawGameOver(350, 250, gfx);
