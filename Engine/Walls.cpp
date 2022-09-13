@@ -11,9 +11,9 @@ Walls::Walls(const Rect& in_rect, int in_thick, Color c)
 
 void Walls::Draw(Graphics& gfx)
 {
-	int left = rect.left + thickness;
+	int left = rect.left - thickness;
 	int right = rect.right + thickness;
-	int top = rect.top + thickness;
+	int top = rect.top - thickness;
 	int bottom = rect.bottom + thickness;
 	assert(left >= 0);
 	assert(right < gfx.ScreenWidth);
