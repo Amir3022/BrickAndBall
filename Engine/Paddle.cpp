@@ -1,4 +1,5 @@
 #include "Paddle.h"
+#include <cmath>
 
 Paddle::Paddle(const Vec2& in_pos, float in_halfWidth, float in_halfHeight)
 	:
@@ -73,7 +74,13 @@ bool Paddle::doCollideWithBall(Ball& ball,float dt)
 			if (ballRect.bottom - GetRect(0.0f).top <= ballVel.y * dt)
 			{
 				ball.addPos(Vec2(0.0f, -ballVel.y * dt));
-				ball.ReboundY();
+				//ball.ReboundY();
+				Vec2 UnitDirection = (ball.getPos() - pos).GetNormalized();
+				ball.setVel(UnitDirection * 450.0f);
+				if (std::signbit(ballVel.x) != std::signbit(UnitDirection.x))
+				{
+					ball.ReboundX();
+				}
 			}
 			else if (ballRect.top - GetRect(0.0f).bottom >= ballVel.y * dt)
 			{
