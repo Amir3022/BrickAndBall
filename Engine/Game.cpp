@@ -32,7 +32,7 @@ Game::Game( MainWindow& wnd )
 	soundBrick(L"Sounds\\arkbrick.wav"),
 	soundPad(L"Sounds\\arkpad.wav"),
 	soundLose(L"Sounds\\lose4.wav"),
-	testWall(Rect(Vec2(20.0,20.0f),Vec2(779.0f,579.0f)),20,Colors::Red)
+	testWall(Rect(Vec2(20.0, 20.0f), Vec2(779.0f, 579.0f)), 20, Colors::Red)
 {
 	Vec2 startPos = Vec2(80.0f, 40.0f);
 	Color colors[nBrickRows] = { Colors::Red,Colors::Blue,Colors::Green,Colors::Yellow,Colors::Magenta,Colors::White };
@@ -45,6 +45,7 @@ Game::Game( MainWindow& wnd )
 			c++;
 		}
 	}
+	
 }
 
 void Game::Go()
