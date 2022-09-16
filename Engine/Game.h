@@ -55,6 +55,8 @@ private:
 	static constexpr int nBricks = nBrickRows * nBrickColomns;
 	static constexpr float BrickWidth = 40.0f;
 	static constexpr float BrickHeight = 15.0f;
+	static constexpr Color backgroundColor = Color(7, 49, 112);
+	static constexpr Color shadeColor = Color(5, 35, 75);
 	FrameTimer ft;
 	Brick Bricks[nBricks];
 	Ball ball;

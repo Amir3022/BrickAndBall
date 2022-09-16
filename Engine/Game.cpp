@@ -36,7 +36,7 @@ Game::Game(MainWindow& wnd)
 	score(0)
 {
 	Vec2 startPos = Vec2(80.0f, 40.0f);
-	Color colors[nBrickRows] = { Colors::Red,Colors::Blue,Colors::Green,Colors::Yellow,Colors::Magenta,Colors::White };
+	Color colors[nBrickRows] = { Colors::Red,Color(245, 124, 2),Colors::Green,Colors::Yellow,Colors::Magenta,Colors::White};
 	int c = 0;
 	for (int j = 0; j < nBrickRows; j++)
 	{
@@ -147,11 +147,16 @@ void Game::ComposeFrame()
 	{
 		for (int i = 0; i < gfx.ScreenWidth; i++)
 		{
-			gfx.PutPixel(i, j, Color(12, 87, 199));
+			gfx.PutPixel(i, j, backgroundColor);
 		}
 	}
 	if (bGameStarted)
 	{
+		walls.DrawShade(gfx, shadeColor);
+		for (Brick& brick : Bricks)
+		{
+			brick.DrawShade(gfx, shadeColor);
+		}
 		for (Brick& brick : Bricks)
 		{
 			brick.Draw(gfx);
