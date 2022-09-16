@@ -10,6 +10,7 @@ public:
 	Brick() = default;
 	Brick(const Rect& in_rect, Color c);
 	void Draw(Graphics& gfx);
+	void DrawShade(Graphics& gfx, Color c);
 	bool CheckCollideWithBall(const Ball& ball) const;
 	void ExecuteCollideWithBall(Ball& ball,float dt);
 	Vec2 GetCenter();

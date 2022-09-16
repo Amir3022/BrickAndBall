@@ -16,6 +16,39 @@ void Brick::Draw(Graphics& gfx)
 	}
 }
 
+void Brick::DrawShade(Graphics& gfx, Color c)
+{
+	if (!bDestroyed)
+	{
+		Rect temp = rect.Expand(padding);
+		float shadeLength = (temp.bottom - temp.top) / 2.0f;
+		int inc = 0;
+		for (int j=int(temp.bottom);j<(temp.bottom+ shadeLength);j++)
+		{
+			for (int i = int(temp.left); i < (temp.right);i++)
+			{
+				gfx.PutPixel(i + inc, j, c);
+			}
+			inc++;
+		}
+		inc = 1;
+		for (int j = int(temp.top); j < temp.bottom + shadeLength; j++)
+		{
+			for (int i = int(temp.right); i < temp.right + shadeLength; i++)
+			{
+				if (i <= temp.right+inc)
+				{
+					gfx.PutPixel(i, j, c);
+				}
+			}
+			if (inc < shadeLength)
+			{
+				inc++;
+			}
+		}
+	}
+}
+
 bool Brick::CheckCollideWithBall(const Ball& ball) const
 {
 	if (!bDestroyed)
