@@ -19,9 +19,9 @@ void Walls::Draw(Graphics& gfx)
 	assert(right < gfx.ScreenWidth);
 	assert(top >= 0);
 	assert(bottom < gfx.ScreenHeight);
-	for (int j = top; j < bottom; j++)
+	for (int j = top; j <= bottom; j++)
 	{
-		for (int i = left; i < right; i++)
+		for (int i = left; i <= right; i++)
 		{
 			if (j >= rect.top && j <= rect.bottom)
 			{
