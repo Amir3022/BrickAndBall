@@ -143,6 +143,13 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	for (int j = 0; j < gfx.ScreenHeight; j++)
+	{
+		for (int i = 0; i < gfx.ScreenWidth; i++)
+		{
+			gfx.PutPixel(i, j, Color(12, 87, 199));
+		}
+	}
 	if (bGameStarted)
 	{
 		for (Brick& brick : Bricks)
