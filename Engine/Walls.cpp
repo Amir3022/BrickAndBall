@@ -38,6 +38,27 @@ void Walls::Draw(Graphics& gfx)
 	}
 }
 
+void Walls::DrawShade(Graphics& gfx, Color c)
+{
+	for (int j = int(rect.top); j <= int(rect.bottom); j++)
+	{
+		for (int i = int(rect.left); i <= int(rect.right); i++)
+		{
+			if (j < rect.top + thickness / 2.0f)
+			{
+				gfx.PutPixel(i, j, c);
+			}
+			else
+			{
+				if (i < rect.left + thickness / 2.0f)
+				{
+					gfx.PutPixel(i, j, c);
+				}
+			}
+		}
+	}
+}
+
 bool Walls::doCollideWithBall(Ball& ball)
 {
 	bool bCollided = false;

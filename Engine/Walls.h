@@ -10,6 +10,7 @@ public:
 	Walls() = default;
 	Walls(const Rect& in_rect, int in_thick, Color c);
 	void Draw(Graphics& gfx);
+	void DrawShade(Graphics& gfx, Color c);
 	bool doCollideWithBall(Ball& ball);
 	bool checkLose();
 	void resetLose();
