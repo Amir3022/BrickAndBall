@@ -16,6 +16,7 @@ public:
 	void doCollideWithWalls(const Rect& walls);
 	bool doCollideWithBall(Ball& ball,float dt);
 	void ResetCooldown();
+	void setPos(const Vec2& in_pos);
 private:
 	Color BodyColor = Colors::Gray;
 	Color WingColor = Colors::Red;

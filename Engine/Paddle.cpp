@@ -98,3 +98,8 @@ void Paddle::ResetCooldown()
 {
 	bCooldown = false;
 }
+
+void Paddle::setPos(const Vec2& in_pos)
+{
+	pos = in_pos;
+}
