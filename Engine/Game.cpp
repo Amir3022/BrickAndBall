@@ -22,17 +22,18 @@
 #include "Game.h"
 #include "SpriteCodex.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ),
-	walls(Vec2(20.0f,20.0f),Vec2(gfx.ScreenWidth-21,gfx.ScreenHeight-21)),
-	ball(Vec2(700.0f,200.0f),Vec2(0.0f,0.0f)),
-	paddle(Vec2(400.0f,500.0f),50.0f,10.0f),
+	wnd(wnd),
+	gfx(wnd),
+	ball(Vec2(700.0f, 200.0f), Vec2(0.0f, 0.0f)),
+	paddle(Vec2(400.0f, 500.0f), 50.0f, 10.0f),
 	soundBrick(L"Sounds\\arkbrick.wav"),
 	soundPad(L"Sounds\\arkpad.wav"),
 	soundLose(L"Sounds\\lose4.wav"),
-	testWall(Rect(Vec2(20.0, 20.0f), Vec2(779.0f, 579.0f)), 20, Colors::Red)
+	walls(Rect(Vec2(20.0, 20.0f), Vec2(779.0f, 579.0f)), 20, Color(50, 50, 50)),
+	lives(2),
+	score(0)
 {
 	Vec2 startPos = Vec2(80.0f, 40.0f);
 	Color colors[nBrickRows] = { Colors::Red,Colors::Blue,Colors::Green,Colors::Yellow,Colors::Magenta,Colors::White };
@@ -65,7 +66,7 @@ void Game::UpdateModel()
 			const float dt = ft.Mark();
 			ball.Update(dt);
 			paddle.Update(wnd.kbd, dt);
-			paddle.doCollideWithWalls(walls);
+			paddle.doCollideWithWalls(walls.getRect());
 			float curDistanceSq;
 			int index;
 			bool collisionHappened = false;
@@ -95,23 +96,33 @@ void Game::UpdateModel()
 				Bricks[index].ExecuteCollideWithBall(ball, dt);
 				paddle.ResetCooldown();
 				soundBrick.Play();
+				score += 5;
 			}
 			if (paddle.doCollideWithBall(ball, dt))
 			{
 				soundPad.Play();
 			}
-			if (ball.doCollideWithWall(walls))
+			if (walls.doCollideWithBall(ball))
 			{
 				paddle.ResetCooldown();
-				bLost = ball.CheckLossCondition();
+				bLost = walls.checkLose();
+				if (bLost)
+				{
+					soundLose.Play();
+					lives--;
+				}
 			}
 		}
 		else
 		{
-			if (!losePlayed)
+			if (wnd.kbd.KeyIsPressed(VK_RETURN) && lives>=0)
 			{
-				soundLose.Play();
-				losePlayed = true;
+				ft.Mark();
+				bLost = false;
+				paddle.setPos(Vec2(400.0f, 500.0f));
+				ball.setPos(Vec2(700.0f,200.0f));
+				ball.setVel(Vec2(1.0f, 1.0f).Normalize() * 450.0f);
+				walls.resetLose();
 			}
 		}
 	}
@@ -123,6 +134,10 @@ void Game::UpdateModel()
 			bGameStarted = true;
 			ball.setVel(Vec2(1.0f, 1.0f).Normalize() * 450.0f);
 		}
+	}
+	if (wnd.kbd.KeyIsPressed(VK_ESCAPE))
+	{
+		exit(0);
 	}
 }
 
@@ -136,7 +151,7 @@ void Game::ComposeFrame()
 		}
 		paddle.Draw(gfx);
 		ball.Draw(gfx);
-		testWall.Draw(gfx);
+		walls.Draw(gfx);
 		if (bLost)
 		{
 			SpriteCodex::DrawGameOver(350, 250, gfx);

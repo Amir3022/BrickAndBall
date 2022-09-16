@@ -57,15 +57,16 @@ private:
 	static constexpr float BrickHeight = 15.0f;
 	FrameTimer ft;
 	Brick Bricks[nBricks];
-	Rect walls;
 	Ball ball;
 	Paddle paddle;
 	Sound soundPad;
 	Sound soundBrick;
 	Sound soundLose;
-	Walls testWall;
+	Walls walls;
 	bool bGameStarted = false;
 	bool losePlayed = false;
 	bool bLost = false;
+	int lives;
+	int score;
 	/********************************/
 };
