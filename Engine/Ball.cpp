@@ -95,3 +95,8 @@ bool Ball::CheckLossCondition()
 {
 	return bLost;
 }
+
+float Ball::getRadius()
+{
+	return radius;
+}
